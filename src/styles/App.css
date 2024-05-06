@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  max-width: 600px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
