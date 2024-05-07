@@ -17,7 +17,7 @@ function Detail() {
     return (
         <>
             <div className="hero" onClick={() => dispatch(setCurrentPokemon(0))}>
-                <i className="arrow"></i>
+                <i data-testid="back-arrow" className="arrow"></i>
                 <b>PokeBook:</b> explore the world of pocket monsters
             </div>
             {
