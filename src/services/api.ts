@@ -1,25 +1,34 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { Pokemon } from '../types/Pokemon.type';
-import type { PokemonLinksResponse } from '../types/PokemonLink.type';
-// Define a service using a base URL and expected endpoints
+import type { PokemonLink, PokemonLinksResponse } from '../types/PokemonLink.type';
+
 export const pokemonApi = createApi({
     reducerPath: 'pokemonApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/pokemon' }),
     endpoints: (builder) => ({
-        getAllPokemon: builder.query<PokemonLinksResponse, void>({
-            query: () => `pokemon`,
+        getAllPokemon: builder.query<PokemonLink[], void>({
+            query: () => ``,
+            transformResponse: (response: PokemonLinksResponse) => {
+                const pokemonResults: PokemonLink[] = [];
+
+                response.results.forEach(pokemonLink => {
+                    const urlParts = pokemonLink.url.split('/');
+
+                    pokemonResults.push({
+                        name: pokemonLink.name,
+                        url: pokemonLink.url,
+                        id: parseInt(urlParts[urlParts.length - 2])
+                    })
+                });
+
+                return pokemonResults;
+            }
         }),
         getPokemonById: builder.query<Pokemon, number>({
-            query: (id) => `pokemon/${id}`,
-        }),
-        getPokemonByIdM: builder.mutation<Pokemon, number>({
-            query: (id) => `pokemon/${id}`
+            query: (id) => `/${id}`,
         }),
     })
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetAllPokemonQuery, useGetPokemonByIdQuery, useGetPokemonByIdMMutation } = pokemonApi
+export const { useGetAllPokemonQuery, useGetPokemonByIdQuery } = pokemonApi
 

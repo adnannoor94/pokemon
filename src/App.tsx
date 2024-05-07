@@ -1,15 +1,16 @@
+import { useSelector } from 'react-redux';
+import { RootState } from './state/store';
 import Detail from './components/Detail';
 import List from './components/List';
-import { useState } from 'react';
 
 import './styles/App.css';
 
 function App() {
+  const pokemonId = useSelector((state: RootState) => state.pokemon.currentPokemonId);
 
-  const [pokemonRequested, setPokemonRequested] = useState<boolean>(true);
   return (
     <div className="App">
-      {pokemonRequested ?
+      {pokemonId > 0 ?
         <Detail />
         : <List />}
     </div>

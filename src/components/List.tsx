@@ -12,7 +12,7 @@ function List() {
         error ? <>Oh no, there was an error</> : isLoading ? <>Loading...</> :
             <><div className="hero"><b>PokeBook:</b> explore the world of pocket monsters</div>
                 <ul>
-                    {data?.results.map((pokemonLink: PokemonLink) => <PokemonListItem {...pokemonLink} key={pokemonLink.name} />)}
+                    {data?.map((pokemonLink: PokemonLink) => <PokemonListItem {...pokemonLink} key={pokemonLink.id} />)}
                 </ul></>
     )
 }

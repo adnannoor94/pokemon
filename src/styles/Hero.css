@@ -9,6 +9,7 @@
   text-align: center;
   font-size: 18px;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 .hero + * {
@@ -28,7 +29,6 @@ b {
   display: inline-block;
   padding: 8px;
   transform: rotate(135deg);
-  cursor: pointer;
   transition: 0.3s ease-in-out;
 }
 

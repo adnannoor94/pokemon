@@ -2,9 +2,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currentPokemonId: 0,
-    pokemon: {
-        name: '',
-    },
 };
 
 const pokemonSlice = createSlice({
@@ -16,5 +13,7 @@ const pokemonSlice = createSlice({
         }
     },
 });
+
+export const { setCurrentPokemon } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

@@ -1,16 +1,21 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../state/store';
+import { setCurrentPokemon } from '../state/Slices/PokemonSlice';
 import { useGetPokemonByIdQuery } from '../services/api';
 
 import '../styles/Detail.css';
 import '../styles/Hero.css';
 
 function Detail() {
-    const { data, error, isLoading } = useGetPokemonByIdQuery(2);
+    const pokemonId = useSelector((state: RootState) => state.pokemon.currentPokemonId);
+    const { data, error, isLoading } = useGetPokemonByIdQuery(pokemonId);
     const typesArray = data?.types?.map(obj => obj.type?.name);
+    const dispatch = useDispatch();
 
     return (
         error ? <>Oh no, there was an error</> : isLoading ? <>Loading...</> :
             <>
-                <div className="hero">
+                <div className="hero" onClick={() => dispatch(setCurrentPokemon(0))}>
                     <i className="arrow"></i>
                     <b>PokeBook:</b> explore the world of pocket monsters
                 </div>
