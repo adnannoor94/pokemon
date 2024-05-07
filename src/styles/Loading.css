@@ -1,0 +1,6 @@
+.loading {
+  border: 1px solid gainsboro;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
